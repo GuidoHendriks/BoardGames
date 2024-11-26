@@ -10,32 +10,9 @@ import UIKit
 import SwiftData
 
 @Model
-final class Game: Encodable {
-    enum CodingKeys: CodingKey {
-        case name
-        case imageUrl
-        case playerCount
-        case ageRange
-        case durationMinutes
-        case complexity
-        case sessions
-        case isFavorite
-    }
-    
-    func encode(to encoder: any Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(name, forKey: .name)
-        try container.encode(imageUrl, forKey: .imageUrl)
-        try container.encode(playerCount, forKey: .playerCount)
-        try container.encode(ageRange, forKey: .ageRange)
-        try container.encode(durationMinutes, forKey: .durationMinutes)
-        try container.encode(complexity, forKey: .complexity)
-        try container.encode(sessions, forKey: .sessions)
-        try container.encode(isFavorite, forKey: .isFavorite)
-    }
+class Game {
     
     var name: String
-    
     var imageUrl: String?
     
     @Attribute(.externalStorage)
@@ -103,5 +80,30 @@ final class Game: Encodable {
             
             return thumbnail
         }
+    }
+}
+
+extension Game: Encodable {
+    enum CodingKeys: CodingKey {
+        case name
+        case imageUrl
+        case playerCount
+        case ageRange
+        case durationMinutes
+        case complexity
+        case sessions
+        case isFavorite
+    }
+    
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(name, forKey: .name)
+        try container.encode(imageUrl, forKey: .imageUrl)
+        try container.encode(playerCount, forKey: .playerCount)
+        try container.encode(ageRange, forKey: .ageRange)
+        try container.encode(durationMinutes, forKey: .durationMinutes)
+        try container.encode(complexity, forKey: .complexity)
+        try container.encode(sessions, forKey: .sessions)
+        try container.encode(isFavorite, forKey: .isFavorite)
     }
 }

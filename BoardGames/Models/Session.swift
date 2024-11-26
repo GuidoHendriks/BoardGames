@@ -9,18 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-final class Session: Encodable {
-    enum CodingKeys: CodingKey {
-        case date
-        case players
-    }
-    
-    func encode(to encoder: any Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(date, forKey: .date)
-        try container.encode(players, forKey: .players)
-    }
-    
+class Session {
     var date: Date
     
     @Relationship(deleteRule: .noAction, inverse: \Game.sessions)
@@ -33,5 +22,18 @@ final class Session: Encodable {
         self.date = date
         self.game = game
         self.players = players
+    }
+}
+
+extension Session: Encodable {
+    enum CodingKeys: CodingKey {
+        case date
+        case players
+    }
+    
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(date, forKey: .date)
+        try container.encode(players, forKey: .players)
     }
 }

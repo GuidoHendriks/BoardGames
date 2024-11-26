@@ -9,16 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-final class Player: Encodable {
-    enum CodingKeys: CodingKey {
-        case name
-    }
-    
-    func encode(to encoder: any Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(name, forKey: .name)
-    }
-    
+class Player {
     var name: String
     
     @Relationship(deleteRule: .deny)
@@ -26,5 +17,16 @@ final class Player: Encodable {
     
     init(name: String) {
         self.name = name
+    }
+}
+
+extension Player: Encodable {
+    enum CodingKeys: CodingKey {
+        case name
+    }
+    
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(name, forKey: .name)
     }
 }
