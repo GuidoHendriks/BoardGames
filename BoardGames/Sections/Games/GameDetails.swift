@@ -14,7 +14,6 @@ struct GameDetails: View {
     
     let game: Game
     
-    
     var body: some View {
         List {
             Section {
@@ -28,7 +27,6 @@ struct GameDetails: View {
                     Text("\(game.durationMinutes) minutes")
                 }
                 LabeledContent("Complexity", value: game.complexity.name)
-                LabeledContent("Sessions", value: "\(game.sessions.count)")
             } header: {
                 if let image = game.image {
                     Image(uiImage: image)
@@ -56,7 +54,6 @@ struct GameDetails: View {
                         .swipeActions(edge: .trailing) {
                             Button("Delete", role: .destructive) {
                                 modelContext.delete(session)
-                                try? modelContext.save()
                             }
                         }
                     }

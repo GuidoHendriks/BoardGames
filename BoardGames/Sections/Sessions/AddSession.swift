@@ -22,9 +22,8 @@ struct AddSession: View {
     var body: some View {
         Form {
             Section {
-                LabeledContent("Game") {
-                    Text(game.name)
-                }
+                Text(game.name)
+                
                 DatePicker("Date", selection: $date, displayedComponents: .date)
             }
             
@@ -63,7 +62,7 @@ struct AddSession: View {
                     players: Array(selectedPlayers)
                 )
                 
-                modelContext.insert(session)
+                game.sessions.append(session)
                 
                 dismiss()
             }
